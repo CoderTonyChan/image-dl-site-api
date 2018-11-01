@@ -1,0 +1,41 @@
+{
+  "name": "image-dl-site-api",
+  "version": "1.0.0",
+  "description": "image-dl-site兄弟项目!",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production ./node_modules/.bin/nodemon ./index.js",
+    "dev": "cross-env NODE_ENV=development ./node_modules/.bin/nodemon ./index.js",
+    "test": "cross-env NODE_ENV=test ./node_modules/.bin/nodemon ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CTLifeHand/image-dl-site-api.git"
+  },
+  "keywords": [
+    "meizitu",
+    "nhentai"
+  ],
+  "author": "TonyChan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CTLifeHand/image-dl-site-api/issues"
+  },
+  "homepage": "https://github.com/CTLifeHand/image-dl-site-api#readme",
+  "dependencies": {
+    "axios": "0.18.0",
+    "koa": "2.6.1",
+    "koa-bodyparser": "^3.2.0",
+    "koa-convert": "^1.2.0",
+    "koa-cors": "0.0.16",
+    "koa-logger": "^2.0.0",
+    "koa-mount": "^4.0.0",
+    "koa-onerror": "^3.0.1",
+    "koa-response-time": "^1.0.2",
+    "koa-router": "7.4.0",
+    "koa-static": "^2.1.0"
+  },
+  "devDependencies": {
+    "cross-env": "^3.1.4",
+    "nodemon": "^1.18.4"
+  }
+}
