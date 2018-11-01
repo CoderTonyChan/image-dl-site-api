@@ -1,35 +1,23 @@
 const axios = require('axios');
+const { resolve } = require('url');
+const cheerio = require('cheerio');
+
 
 module.exports = async (ctx) => {
     const { id } = ctx.params;
+    // console.log(id);
+    
+    const url = `https://nhentai.net/g/${id}/`;
+    const { data } = await axios.get(url);
+    const $ = cheerio.load(data);
 
-    const contentUrl = `http://adr.meizitu.net/wp-json/wp/v2/i?id=${id}`;
-    const postUrl = `http://adr.meizitu.net/wp-json/wp/v2/posts/${id}`;
-    const link = `http://www.mzitu.com/${id}`;
+    // thumb to high-quality
+    let galleryThumbs = $('.gallerythumb img')
+        .map((_, ele) => resolve('https://nhentai.net', $(ele).attr('data-src')))
+        .get();
+    galleryThumbs = galleryThumbs.map((src) => src.replace(/(.+)(\d+)t\.(.+)/, (_, p1, p2, p3) => `${p1}${p2}.${p3}`));
+    galleryThumbs = galleryThumbs.map((src) => src.replace('t.nhentai.net', 'i.nhentai.net'));
 
-    const contentResponse = await axios({
-        method: 'get',
-        url: contentUrl,
-    });
-    const content = contentResponse.data.content.split(',');
-
-    const postResponse = await axios({
-        method: 'get',
-        url: postUrl,
-    });
-    const { title } = postResponse.data;
-
-    ctx.state.data = {
-        title: title,
-        link,
-        item: content.map((url, index) => {
-            url = url.replace(/"/g, '');
-
-            return {
-                title: `${title}（${index + 1}）`,
-                description: `<img referrerpolicy="no-referrer" src="${url}">`,
-                link: url,
-            };
-        }),
-    };
+    // console.log(galleryThumbs);
+    ctx.body = galleryThumbs;
 };
