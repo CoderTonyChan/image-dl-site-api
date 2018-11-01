@@ -18,6 +18,6 @@ module.exports = async (ctx) => {
     galleryThumbs = galleryThumbs.map((src) => src.replace(/(.+)(\d+)t\.(.+)/, (_, p1, p2, p3) => `${p1}${p2}.${p3}`));
     galleryThumbs = galleryThumbs.map((src) => src.replace('t.nhentai.net', 'i.nhentai.net'));
 
-    // console.log(galleryThumbs);
+    console.log(galleryThumbs);
     ctx.body = galleryThumbs;
 };
