@@ -3,6 +3,9 @@ image-dl-site api server for shortcuts
 
 - image-dl-site兄弟项目!
 
+```
+docker build -t codertonychan/image-dl-site-api:latest .
+```
 
 ## 部署
 
@@ -29,3 +32,9 @@ cd image-dl-site-api
 npm i
 ```
 
+### 使用 Docker 部署
+```
+docker pull codertonychan/image-dl-site-api
+docker run -d --name image-dl-site-api -p 3000:3000 codertonychan/image-dl-site-api
+or docker run -d --name image-dl-site-api -p 80:3000 codertonychan/image-dl-site-api
+```
